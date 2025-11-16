@@ -1,0 +1,66 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+    font-family:sans-serif;
+}
+
+h1{
+    text-align: center;
+}
+
+.contenedor{
+   display: flex;           /* Activa Flexbox */
+    flex-direction: column;  /* Organiza los elementos en columna */
+    align-items: center;     /* Centra el input y el botón horizontalmente */
+    gap: 10px;               /* Espacio entre input y botón */
+    margin-top: 50px;        /* Baja todo un poco */
+}
+input {
+    padding: 10px;
+    width: 250px;
+}
+
+button {
+    padding: 10px 20px;
+}
+.lista{
+    text-align: center;      /* Centra el texto */
+    margin-top: 30px;        /* Baja el contenido */
+}
+
+
+#taskList {
+    display: inline-block;   /* Permite centrar la lista */
+    text-align: left;        /* Mantiene los números alineados a la izquierda */
+    margin-top: 10px;
+}
+li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #f0f0f0;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+li button {
+    background: #ff4444;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+li button:hover {
+    background: #cc0000;
+}
+/*display: flex → activa flexbox
+
+flex-direction: column → coloca el input arriba y el botón abajo
+
+align-items: center → centra ambos elementos
+
+gap: 10px → separa el input y el botón sin usar márgenes*/
