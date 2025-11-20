@@ -2,6 +2,8 @@
 const input = document.getElementById('taskInput');
 const button = document.getElementById('addButton');
 const lista = document.getElementById('taskList');
+const contador = document.getElementById('contador');
+
 
 // FUNCIÓN que agrega tareas
 function agregarTarea() {
@@ -29,7 +31,8 @@ function agregarTarea() {
     
     // 6. Cuando click en eliminar, borrar tarea
     botonEliminar.onclick = function() {
-        nuevoLi.remove();
+        nuevoLi.remove();//Elimina elemento del DOM
+        actualizarContador();
     };
     
     // 7. Agregar botón dentro del <li>
@@ -37,11 +40,17 @@ function agregarTarea() {
     
     // 8. Agregar <li> a la lista
     lista.appendChild(nuevoLi);
+    actualizarContador()
     
     // 9. Limpiar input
     input.value = '';
 }
+//Contador de tareas
+function actualizarContador(){
 
+    const numeroTareas = lista.children.length ;
+    contador.textContent = "Total: " + numeroTareas + " tareas";
+}
 // CONECTAR botón con la función
 button.addEventListener('click', agregarTarea);
 
