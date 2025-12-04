@@ -18,9 +18,25 @@ function agregarTarea() {
     
     // 3. Crear nuevo <li>
     const nuevoLi = document.createElement('li');
+    //Creando el checkbox
+    const checkbox = document.createElement('input');
+    checkbox.type = "checkbox";
+
+    checkbox.addEventListener('change', function(){
+        if(checkbox.checked){
+            textoSpan.style.textDecoration = 'line-through';
+        }else{
+            textoSpan.style.textDecoration = 'none';
+        }
+    })
+   
     
     // 4. Poner texto en el <li>
-    nuevoLi.textContent = textoTarea;
+    const textoSpan = document.createElement('span')
+    textoSpan.textContent = textoTarea;
+
+    nuevoLi.appendChild(checkbox);
+    nuevoLi.appendChild(textoSpan);
     
     // 5. Crear botón eliminar
     const botonEliminar = document.createElement('button');
@@ -29,7 +45,7 @@ function agregarTarea() {
     botonEliminar.style.padding = '5px 10px';
     botonEliminar.style.cursor = 'pointer';
     
-    // 6. Cuando click en eliminar, borrar tarea
+    // 6. Cuando click en eliminar, borrar tarea  
     botonEliminar.onclick = function() {
         nuevoLi.remove();//Elimina elemento del DOM
         actualizarContador();
