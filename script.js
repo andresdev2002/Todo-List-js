@@ -49,6 +49,7 @@ function agregarTarea() {
     botonEliminar.onclick = function() {
         nuevoLi.remove();//Elimina elemento del DOM
         actualizarContador();
+        guardarTareas();
     };
     
     // 7. Agregar botón dentro del <li>
@@ -57,7 +58,7 @@ function agregarTarea() {
     // 8. Agregar <li> a la lista
     lista.appendChild(nuevoLi);
     actualizarContador()
-    
+    guardarTareas();
     // 9. Limpiar input
     input.value = '';
 }
@@ -70,9 +71,75 @@ function actualizarContador(){
 // CONECTAR botón con la función
 button.addEventListener('click', agregarTarea);
 
-// BONUS: Funciona con Enter también
+// Funciona con Enter también
 input.addEventListener('keypress', function(evento) {
     if (evento.key === 'Enter') {
         agregarTarea();
     }
 });
+
+//Guardar tareas
+
+function guardarTareas(){
+    const tareas = [];
+
+    //obtener todos los <li>
+    const items = lista.children;
+    //recorrer cada <li>
+    for(let i = 0; i < items.length; i++){
+       //obtener el texto del Span
+        const texto = items[i].querySelector('span');
+        const eltexto = texto.textContent;
+        tareas.push(eltexto);
+
+    }
+    //Guardar array
+    localStorage.setItem('tareas', JSON.stringify(tareas));
+    
+}
+
+function cargarTarea(){
+    //Obtener del localStorage
+    const tareasGuardadas = localStorage.getItem('tareas');
+    //Si no hay nada salir
+    if(!tareasGuardadas)return;
+    //convertir de JSON a array
+    const tareas = JSON.parse(tareasGuardadas);
+    tareas.forEach(function(textoTarea){
+
+    const nuevoLi = document.createElement('li');
+        const checkbox = document.createElement('input');
+            checkbox.type = "checkbox";
+            checkbox.addEventListener('change', function(){
+    if(checkbox.checked){
+        textoSpan.style.textDecoration = 'line-through';
+    }else{
+        textoSpan.style.textDecoration = 'none';
+    }
+});
+            // 4. Poner texto en el <li>
+    const textoSpan = document.createElement('span')
+    textoSpan.textContent = textoTarea;
+
+    const botonEliminar = document.createElement('button');
+    botonEliminar.textContent = 'Eliminar';
+    botonEliminar.style.marginLeft = '10px';
+    botonEliminar.style.padding = '5px 10px';
+    botonEliminar.style.cursor = 'pointer';
+    botonEliminar.onclick = function() {
+    nuevoLi.remove();
+    actualizarContador();
+    guardarTareas();
+};
+
+     // 7. Agregar botón dentro del <li>
+    nuevoLi.appendChild(botonEliminar);
+    nuevoLi.appendChild(checkbox);
+nuevoLi.appendChild(textoSpan);
+    
+    // 8. Agregar <li> a la lista
+    lista.appendChild(nuevoLi);
+    
+    })
+}
+cargarTarea();
