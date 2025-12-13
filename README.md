@@ -14,4 +14,4 @@ Aplicación simple de lista de tareas construida con HTML, CSS y JavaScript puro
 
 ##  Autor
 **Andrés Calderón**  
-Tecnólogo SENA | Futuro AI/ML Software Engineer
+Tecnólogo SENA | Futuro Software Engineer
